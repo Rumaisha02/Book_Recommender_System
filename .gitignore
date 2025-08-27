@@ -1,0 +1,12 @@
+# Ignore large datasets
+*.csv
+
+# But keep small/sample CSVs
+!*_sample.csv
+
+# Ignore Jupyter autosave checkpoints (not the real notebook)
+.ipynb_checkpoints/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
