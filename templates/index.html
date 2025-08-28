@@ -1,170 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Recommender System</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Recommender System</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    xintegrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <style>
-    .text-white{
-        color: white;
-    }
+  .text-white {
+    color: white;
+  }
+  /* Optional: Add some styling to the card for better visual separation */
+  .book-card {
+    background-color: #5a0705; /* A slightly lighter shade of your body background */
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px; /* Space between cards in different rows */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Center content within the card */
+  }
+  .book-card img {
+    border-radius: 4px; /* Slightly rounded images */
+    margin-bottom: 10px;
+    max-height: 200px; /* Limit image height */
+    object-fit: contain; /* Ensure image fits without cropping */
+  }
 </style>
-<body style='background-color: #3D0301'>
-    <nav class="navbar"  style='background-color:#FBDB93'>
-        <h1 class="navbar-brand" style='color: black;'>Book Recommender System</h1>
-        <ul class="nav navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-        </ul>
-    </nav>
 
-    <div class="container">
-        <div class="rows">
-            <div class="col-12">
-                <h1 class="text-white">Top 50 Books</h1>
-            </div>
-            
-            <div class="row" style="margin-top:30px">
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
+<body style='background-color: #3D0301'>
+  <nav class="navbar" style='background-color:#FBDB93'>
+    <div class="container-fluid"> <!-- Use container-fluid for full width nav or container for centered -->
+        <h1 class="navbar-brand mb-0 h1" style='color: black;'>Book Recommender System</h1> <!-- mb-0 h1 for better alignment -->
+        <ul class="nav justify-content-end"> <!-- justify-content-end to push links to the right -->
+            <li class="nav-item"><a class="nav-link" href="#" style="color: black;">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" style="color: black;">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" style="color: black;">Contact</a></li>
+        </ul>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 30px;">
+    <div class="row">
+      <div class="col-12 mb-4"> <!-- Add mb-4 for margin below the title -->
+        <h1 class="text-white">Top 50 Books</h1>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
+
+    <div class="row"> <!-- This is the single outer row -->
+      {% for i in range(book_Name|length)%}
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- Use responsive columns -->
+          <div class="book-card"> <!-- Apply the new card styling -->
+            <img class="img-fluid" src="{{imageURLM[i]}}" alt="{{book_Name[i]}} Book Cover">
+            <h5 class="text-white">{{book_Name[i]}}</h5>
+            <p class="text-white">{{ book_Author[i] }}</p>
+            <p class="text-white">Votes: {{ noOfRating[i] }} </p>
+            <p class="text-white">Rating: {{ '%.2f'|format(avg_Rating[i]|float) }}</p> <!-- Format rating to 2 decimal places -->
+          </div>
         </div>
-      </div>
+      {% endfor%}
     </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3">
-      <div class="">
-        <div class="card-body">
-          <img class="img-fluid" src="http://images.amazon.com/images/P/0002005018.01.MZZZZZZZ.jpg">
-          <h5 class="text-white">Clara Callan</h5>
-          <p class="text-white">Richard Bruce Wright</p>
-          <p class="text-white">Votes: 300</p>
-          <p class="text-white">Rating: 8.5</p>
-        </div>
-      </div>
-    </div>
-          
-           
-        </div>
-    </div> 
-</body >
-</html> 
+  </div>
+</body>
+
+</html>
