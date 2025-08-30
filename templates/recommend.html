@@ -1,67 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Recommender System</title>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Book Recommender System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      xintegrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  </head>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-    xintegrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-</head>
+  <style>
+    .text-white {
+      color: white;
+    }
 
-<style>
-  .text-white {
-    color: white;
-  }
-  /* Optional: Add some styling to the card for better visual separation */
-  .book-card {
-    background-color: #5a0705; /* A slightly lighter shade of your body background */
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px; /* Space between cards in different rows */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center; /* Center content within the card */
-  }
-  .book-card img {
-    border-radius: 4px; /* Slightly rounded images */
-    margin-bottom: 10px;
-    max-height: 200px; /* Limit image height */
-    object-fit: contain; /* Ensure image fits without cropping */
-  }
-</style>
+    /* Optional: Add some styling to the card for better visual separation */
+    .book-card {
+      background-color: #5a0705;
+      /* A slightly lighter shade of your body background */
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      /* Space between cards in different rows */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      /* Center content within the card */
+    }
 
-<body style='background-color: #3D0301'>
-  <nav class="navbar" style='background-color:#FBDB93'>
-    <div class="container-fluid"> <!-- Use container-fluid for full width nav or container for centered -->
-        <h1 class="navbar-brand mb-0 h1" style='color: black;'>Book Recommender System</h1> <!-- mb-0 h1 for better alignment -->
-        <ul class="nav justify-content-end"> <!-- justify-content-end to push links to the right -->
-            <li class="nav-item"><a class="nav-link" href="#" style="color: black;">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" style="color: black;">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" style="color: black;">Contact</a></li>
+    .book-card img {
+      border-radius: 4px;
+      /* Slightly rounded images */
+      margin-bottom: 10px;
+      max-height: 200px;
+      /* Limit image height */
+      object-fit: contain;
+      /* Ensure image fits without cropping */
+    }
+  </style>
+
+  <body style="background-color: #3d0301">
+    <nav class="navbar" style="background-color: #fbdb93">
+      <div class="container-fluid">
+        <!-- Use container-fluid for full width nav or container for centered -->
+        <h1 class="navbar-brand mb-0 h1" style="color: black">
+          Book Recommender System
+        </h1>
+        <!-- mb-0 h1 for better alignment -->
+        <ul class="nav justify-content-end">
+          <!-- justify-content-end to push links to the right -->
+          <li class="nav-item">
+            <a class="nav-link" href="/" style="color: black">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/recommendations" style="color: black"
+              >Recommend</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" style="color: black">Contact</a>
+          </li>
         </ul>
-    </div>
-  </nav>
-
-  <div class="container" style="margin-top: 30px;">
-    <div class="row">
-      <div class="col-12 mb-4"> <!-- Add mb-4 for margin below the title -->
-        <h1 class="text-white">Top 50 Books</h1>
       </div>
-    </div>
+    </nav>
 
-    <div class="row"> <!-- This is the single outer row -->
-     
-        <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- Use responsive columns -->
-          <div class="book-card"> <!-- Apply the new card styling -->
-            <img class="img-fluid" src="#" alt="Book Cover">
-            <h5 class="text-white">jkszg</h5>
-            <p class="text-white">sgfsh</p>
+    <div class="container" style="margin-top: 30px">
+      <div class="row">
+        <div class="col-12 mb-4">
+          <!-- Add mb-4 for margin below the title -->
+          <h1 class="text-white">
+            BOOK RECOMMENDATIONS THAT YOU SHOULD GIVE A TRY!
+          </h1>
+          <form action="/recommendedBooks" method="post">
+            <input name="UserInput" type="text" class="form-control" /><br />
+            <input type="submit" class="btn btn-lg btn-warning" />
+          </form>
+        </div>
+      </div>
+      {% if data %} 
+      <div class="row">
+      {% for i in data %}
+        <!-- This is the single outer row -->
+
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+          <!-- Use responsive columns -->
+          <div class="book-card">
+            <!-- Apply the new card styling -->
+            <img
+              class="img-fluid"
+              src="{{i[2]}}"
+              alt="Image of book Cover"
+            />
+            <h5 class="text-white">{{i[0]}}</h5>
+            <p class="text-white">{{i[1]}}</p>
           </div>
         </div>
-      
+        {% endfor%} 
+        {% endif %}
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
