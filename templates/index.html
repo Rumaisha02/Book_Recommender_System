@@ -11,34 +11,49 @@
 </head>
 
 <style>
-  .text-white {
-    color: white;
+  .textblack{
+   color: black;
   }
   /* Optional: Add some styling to the card for better visual separation */
   .book-card {
-    background-color: #5a0705; /* A slightly lighter shade of your body background */
+    background-color: #FBDB93; /* A slightly lighter shade of your body background */
     border-radius: 8px;
     padding: 15px;
     margin-bottom: 20px; /* Space between cards in different rows */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center; /* Center content within the card */
+
+     border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
   }
+    .book-card:hover {
+    transform: scale(1.05);
+}
+
   .book-card img {
     border-radius: 4px; /* Slightly rounded images */
     margin-bottom: 10px;
     max-height: 200px; /* Limit image height */
     object-fit: contain; /* Ensure image fits without cropping */
   }
+
+
+  nav a:hover {
+    color: #FBDB93;
+    border-bottom: 5px solid #FBDB93;
+}
+
 </style>
 
-<body style='background-color: #3D0301'>
-  <nav class="navbar" style='background-color:#FBDB93'>
+<body style='background:#603F26'>
+  <nav class="navbar" style='background-color:#422d1b'>
     <div class="container-fluid"> <!-- Use container-fluid for full width nav or container for centered -->
-        <h1 class="navbar-brand mb-0 h1" style='color: black;'>Book Recommender System</h1> <!-- mb-0 h1 for better alignment -->
-        <ul class="nav justify-content-end"> <!-- justify-content-end to push links to the right -->
-            <li class="nav-item"><a class="nav-link" href="/" style="color: black;">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="/recommendations" style="color: black;">Recommend</a></li>
-            <li class="nav-item"><a class="nav-link" href="#" style="color: black;">Contact</a></li>
+        <!-- <h1 class="navbar-brand mb-0 h1" style='color: black;'></h1> mb-0 h1 for better alignment -->
+        <ul class="nav justify-content-evenly"> <!-- justify-content-end to push links to the right -->
+            <li class="nav-item"><a class="nav-link" href="/" style="color: #F6F1E9;">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="/recommendations" style="color: #F6F1E9;">Recommend</a></li>
+            <li class="nav-item"><a class="nav-link" href="#" style="color: #F6F1E9;">Contact</a></li>
         </ul>
     </div>
   </nav>
@@ -46,7 +61,7 @@
   <div class="container" style="margin-top: 30px;">
     <div class="row">
       <div class="col-12 mb-4"> <!-- Add mb-4 for margin below the title -->
-        <h1 class="text-white">Top 50 Books</h1>
+        <h1 class="" style="color: #F6F1E9;">Top 50 Books</h1>
       </div>
     </div>
 
@@ -55,10 +70,10 @@
         <div class="col-lg-3 col-md-4 col-sm-6 mb-4"> <!-- Use responsive columns -->
           <div class="book-card"> <!-- Apply the new card styling -->
             <img class="img-fluid" src="{{imageURLM[i]}}" alt="{{book_Name[i]}} Book Cover">
-            <h5 class="text-white">{{book_Name[i]}}</h5>
-            <p class="text-white">{{ book_Author[i] }}</p>
-            <p class="text-white">Votes: {{ noOfRating[i] }} </p>
-            <p class="text-white">Rating: {{ '%.2f'|format(avg_Rating[i]|float) }}</p> <!-- Format rating to 2 decimal places -->
+            <h5 class="textblack">{{book_Name[i]}}</h5>
+            <p class="textblack">{{ book_Author[i] }}</p>
+            <p class="textblack">Votes: {{ noOfRating[i] }}👍 </p>
+            <p class="textblack">Rating: {{ '%.2f'|format(avg_Rating[i]|float) }}⭐ </p> <!-- Format rating to 2 decimal places -->
           </div>
         </div>
       {% endfor%}
