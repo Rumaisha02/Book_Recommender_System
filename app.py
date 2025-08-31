@@ -7,7 +7,15 @@ Our_Data_Table=pickle.load(open('Our_Data_Table.pkl','rb'))
 Similarity_score=pickle.load(open('Similarity_score.pkl','rb'))
 
 app=Flask(__name__)
+
 @app.route('/')
+def home():
+    return render_template('home.html')
+
+
+
+
+@app.route('/home')
 
 def index():
     return render_template('index.html',
